@@ -19,7 +19,13 @@ export class Navbar extends Component {
             <div className={style.item}>HomePage</div>
             <div className={style.item}>Products</div>
             <div className={style.item}>Menu</div>
-            <Image src={"/img/logo.png"} alt="" width={122} height={42} />
+            <Image
+              src={"/img/logo.png"}
+              alt=""
+              width={122}
+              className={style.logoImage}
+              height={102}
+            />
 
             <div className={style.item}>Events</div>
             <div className={style.item}>Blog</div>
