@@ -1,109 +1,108 @@
-import Image from "next/image";
 import styles from "../../styles/Order.module.css";
+import Image from "next/image";
 
-export default function Order() {
+const Order = () => {
+  const status = 0;
+
+  const statusClass = (index) => {
+    if (index - status < 1) return styles.done;
+    if (index - status === 1) return styles.inProgress;
+    if (index - status > 1) return styles.undone;
+  };
   return (
-    <div className={styles.order}>
+    <div className={styles.container}>
       <div className={styles.left}>
-        <table className={styles.table}>
-          <tr className={styles.row}>
-            <th>Order Id</th>
-            <th>Customer</th>
-            <th>Address</th>
-            <th>Total</th>
-          </tr>
-          <tr>
-            <td>
-              <span className={styles.name}>12346789</span>
-            </td>
-            <td>
-              <span className={styles.name}>abdul shakoor</span>
-            </td>
-            <td>
-              <span className={styles.name}>kattipara mahal</span>
-            </td>
-            <td>
-              <span className={styles.name}>400</span>
-            </td>
-          </tr>
-          <tr className={styles.status}>
-            <td>
-              <div className={styles.oneColum}>
-                <Image
-                  src={"/img/paid.png"}
-                  width={30}
-                  height={30}
-                  alt="no image"
-                />
-                <span className={styles.text}>Payment</span>
-                <Image
-                  src={"/img/checked.png"}
-                  width={30}
-                  height={30}
-                  alt="no image"
-                />
-              </div>
-            </td>
-            <td>
-              <div className={styles.oneColum}>
-                <Image
-                  src={"/img/bake.png"}
-                  width={30}
-                  height={30}
-                  alt="no image"
-                />
-                <span className={styles.text}>Priparing</span>
-                <Image
-                  src={"/img/checked.png"}
-                  width={30}
-                  height={30}
-                  alt="no image"
-                />
-              </div>
-            </td>
-            <td>
-              <div className={styles.oneColum}>
-                <Image
-                  src={"/img/bike.png"}
-                  width={30}
-                  height={30}
-                  alt="no image"
-                />
-                <span className={styles.text}>On the Way</span>
-                <Image
-                  src={"/img/checked.png"}
-                  width={30}
-                  height={30}
-                  alt="no image"
-                />
-              </div>
-            </td>
-            <td>
-              <div className={styles.oneColum}>
-                <Image
-                  src={"/img/delivered.png"}
-                  width={30}
-                  height={30}
-                  alt="no image"
-                />
-                <span className={styles.text}>Deliverd</span>
-                <Image
-                  src={"/img/checked.png"}
-                  width={30}
-                  height={30}
-                  alt="no image"
-                />
-              </div>
-            </td>
-          </tr>
-        </table>
+        <div className={styles.row}>
+          <table className={styles.table}>
+            <tr className={styles.trTitle}>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Address</th>
+              <th>Total</th>
+            </tr>
+            <tr className={styles.tr}>
+              <td>
+                <span className={styles.id}>129837819237</span>
+              </td>
+              <td>
+                <span className={styles.name}>John Doe</span>
+              </td>
+              <td>
+                <span className={styles.address}>Elton st. 212-33 LA</span>
+              </td>
+              <td>
+                <span className={styles.total}>$79.80</span>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div className={styles.row}>
+          <div className={statusClass(0)}>
+            <Image src="/img/paid.png" width={30} height={30} alt="" />
+            <span>Payment</span>
+            <div className={styles.checkedIcon}>
+              <Image
+                className={styles.checkedIcon}
+                src="/img/checked.png"
+                width={20}
+                height={20}
+                alt=""
+              />
+            </div>
+          </div>
+          <div className={statusClass(1)}>
+            <Image src="/img/bake.png" width={30} height={30} alt="" />
+            <span>Preparing</span>
+            <div className={styles.checkedIcon}>
+              <Image
+                className={styles.checkedIcon}
+                src="/img/checked.png"
+                width={20}
+                height={20}
+                alt=""
+              />
+            </div>
+          </div>
+          <div className={statusClass(2)}>
+            <Image src="/img/bike.png" width={30} height={30} alt="" />
+            <span>On the way</span>
+            <div className={styles.checkedIcon}>
+              <Image
+                className={styles.checkedIcon}
+                src="/img/checked.png"
+                width={20}
+                height={20}
+                alt=""
+              />
+            </div>
+          </div>
+          <div className={statusClass(3)}>
+            <Image src="/img/delivered.png" width={30} height={30} alt="" />
+            <span>Delivered</span>
+            <div className={styles.checkedIcon}>
+              <Image
+                className={styles.checkedIcon}
+                src="/img/checked.png"
+                width={20}
+                height={20}
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
       </div>
       <div className={styles.right}>
-        <div className={styles.container}>
-          <h2>Cart Total</h2>
-          <span>Subtotal 400</span>
-          <span>Discount 0</span>
-          <span>Total 400</span>
+        <div className={styles.wrapper}>
+          <h2 className={styles.title}>CART TOTAL</h2>
+          <div className={styles.totalText}>
+            <b className={styles.totalTextTitle}>Subtotal:</b>400
+          </div>
+          <div className={styles.totalText}>
+            <b className={styles.totalTextTitle}>Discount:</b>0.00
+          </div>
+          <div className={styles.totalText}>
+            <b className={styles.totalTextTitle}>Total:</b>400
+          </div>
           <button disabled className={styles.button}>
             PAID
           </button>
@@ -111,4 +110,6 @@ export default function Order() {
       </div>
     </div>
   );
-}
+};
+
+export default Order;

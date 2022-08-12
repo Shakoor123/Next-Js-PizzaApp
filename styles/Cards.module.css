@@ -31,3 +31,17 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
+@media screen and (max-width: 480px) {
+  .cards {
+    padding: 0;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+  }
+  .cardContainer {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: azure;
+  }
+}

@@ -1,13 +1,13 @@
 .container {
+  height: 100px;
+  padding: 0px 30px;
   background-color: #d1411e;
-  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: white;
   position: sticky;
-  overflow: hidden;
-  height: 50px;
+  top: 0;
+  z-index: 999;
 }
 .top {
   display: flex;
@@ -74,4 +74,9 @@
 }
 .logoImage {
   object-fit: cover;
+}
+@media only screen and (max-width: 480px) {
+  .center {
+    display: none;
+  }
 }
