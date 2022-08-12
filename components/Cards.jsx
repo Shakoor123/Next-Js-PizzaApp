@@ -1,6 +1,6 @@
 import style from "../styles/Cards.module.css";
 import Card from "./Card";
-export default function Cards() {
+export default function Cards({ pizzaLists }) {
   return (
     <div className={style.cards}>
       <div className={style.top}>
@@ -14,14 +14,9 @@ export default function Cards() {
       </div>
       <div className={style.bottom}>
         <div className={style.cardContainer}>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {pizzaLists.map((pizza) => {
+            return <Card pizza={pizza} key={pizza._id} />;
+          })}
         </div>
       </div>
     </div>
