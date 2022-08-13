@@ -2,10 +2,14 @@ import Image from "next/image";
 import { useState } from "react";
 import style from "../../styles/Product.module.css";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../redux/cartSlice";
 export default function Product({ pizza }) {
   const [size, setSize] = useState(0);
   const [price, setPrice] = useState(pizza.price[0]);
+  const [quantity, setQuantity] = useState(1);
   const [extras, setExtras] = useState([]);
+  const dispatch = useDispatch();
   const changePrice = (number) => {
     setPrice(price + number);
   };
@@ -21,8 +25,12 @@ export default function Product({ pizza }) {
       setExtras((prev) => [...prev, toping]);
     } else {
       changePrice(-toping.price);
-      setExtras(extras.filter(option));
+      setExtras(extras.filter((extras) => extras._id !== toping._id));
     }
+  };
+
+  const handleClick = () => {
+    dispatch(addProduct({ ...pizza, extras, price, quantity }));
   };
   return (
     <div className={style.container}>
@@ -55,7 +63,7 @@ export default function Product({ pizza }) {
         <div className={style.ingrediands}>
           {pizza.topings.map((toping) => {
             return (
-              <div className={style.ingrediand} key={toping.text}>
+              <div className={style.ingrediand} key={toping._id}>
                 <input
                   type="checkbox"
                   className={style.checkbox}
@@ -70,8 +78,15 @@ export default function Product({ pizza }) {
             );
           })}
         </div>
-        <input type="number" className={style.count} value="1" />
-        <button className={style.button}>Add to Cart</button>
+        <input
+          type="number"
+          className={style.count}
+          value={quantity}
+          onChange={(e) => setQuantity(e.target.value)}
+        />
+        <button className={style.button} onClick={handleClick}>
+          Add to Cart
+        </button>
       </div>
     </div>
   );

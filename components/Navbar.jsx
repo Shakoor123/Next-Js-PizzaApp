@@ -1,38 +1,45 @@
 import Image from "next/image";
 import React, { Component } from "react";
 import style from "../styles/Navbar.module.css";
-export class Navbar extends Component {
-  render() {
-    return (
-      <div className={style.container}>
-        <div className={style.top}>
-          <div className={style.logo}>
-            <Image src={"/img/telephone.png"} alt="" width={22} height={22} />
-          </div>
-          <div className={style.contact}>
-            <span>Order Now</span>
-            <span>123 456 789</span>
-          </div>
-        </div>
-        <div className={style.center}>
-          <div className={style.list}>
-            <div className={style.item}>HomePage</div>
-            <div className={style.item}>Products</div>
-            <div className={style.item}>Menu</div>
-            <Image
-              src={"/img/logo.png"}
-              alt=""
-              width={122}
-              className={style.logoImage}
-              height={102}
-            />
+import Link from "next/link";
+import { useSelector } from "react-redux";
+export default function Navbar() {
+  const quantity = useSelector((state) => state.cart.quantity);
 
-            <div className={style.item}>Events</div>
-            <div className={style.item}>Blog</div>
-            <div className={style.item}>Contact</div>
-          </div>
+  return (
+    <div className={style.container}>
+      <div className={style.top}>
+        <div className={style.logo}>
+          <Image src={"/img/telephone.png"} alt="" width={22} height={22} />
         </div>
-        <div className={style.bottom}>
+        <div className={style.contact}>
+          <span>Order Now</span>
+          <span>123 456 789</span>
+        </div>
+      </div>
+      <div className={style.center}>
+        <div className={style.list}>
+          <Link href={"/"}>
+            <div className={style.item}>HomePage</div>
+          </Link>
+          <div className={style.item}>Products</div>
+          <div className={style.item}>Menu</div>
+          <Image
+            src={"/img/logo.png"}
+            alt=""
+            width={122}
+            className={style.logoImage}
+            height={102}
+          />
+
+          <div className={style.item}>Events</div>
+          <div className={style.item}>Blog</div>
+          <div className={style.item}>Contact</div>
+        </div>
+      </div>
+
+      <div className={style.bottom}>
+        <Link href={"/cart"}>
           <Image
             src={"/img/cart.png"}
             alt=""
@@ -40,13 +47,12 @@ export class Navbar extends Component {
             width={22}
             height={22}
           />
-          <div className={style.valueCircle}>
-            <div className={style.value}>4</div>
-          </div>
+        </Link>
+
+        <div className={style.valueCircle}>
+          <div className={style.value}>{quantity}</div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
-
-export default Navbar;
