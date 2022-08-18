@@ -19,7 +19,7 @@ export default function Navbar() {
       </div>
       <div className={style.center}>
         <div className={style.list}>
-          <Link href={"/"}>
+          <Link href={"/"} passHref>
             <div className={style.item}>HomePage</div>
           </Link>
           <div className={style.item}>Products</div>
@@ -39,7 +39,7 @@ export default function Navbar() {
       </div>
 
       <div className={style.bottom}>
-        <Link href={"/cart"}>
+        <Link href={"/cart"} passHref>
           <Image
             src={"/img/cart.png"}
             alt=""
