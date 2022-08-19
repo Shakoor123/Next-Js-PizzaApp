@@ -7,14 +7,27 @@ import {
   PayPalButtons,
   usePayPalScriptReducer,
 } from "@paypal/react-paypal-js";
-
+import axios from "axios";
+import { useRouter } from "next/router";
+import { reset } from "../redux/cartSlice";
 export default function cart() {
+  const cart = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
-  const amount = "2";
+  const amount = cart.total;
   const currency = "USD";
   const style = { layout: "vertical" };
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
+  const router = useRouter();
+
+  const createOrder = async (data) => {
+    try {
+      const res = await axios.post("http://localhost:3000/api/orders", data);
+      res.status === 200 && router.push("/orders/" + res.data._id);
+      dispatch(reset());
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const ButtonWrapper = ({ currency, showSpinner }) => {
     // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
     // This is the main reason to wrap the PayPalButtons in a new component
@@ -57,7 +70,8 @@ export default function cart() {
           }}
           onApprove={function (data, actions) {
             return actions.order.capture().then(function (details) {
-              console.log(details);
+              const shipping = details.purchase_units[0].shipping;
+              createOrder(shipping);
             });
           }}
         />
