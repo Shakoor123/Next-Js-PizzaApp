@@ -10,9 +10,11 @@ import {
 import axios from "axios";
 import { useRouter } from "next/router";
 import { reset } from "../redux/cartSlice";
+import OrderDetails from "../components/orderDetails";
 export default function cart() {
   const cart = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
+  const [cash, setCash] = useState();
   const amount = cart.total;
   const currency = "USD";
   const style = { layout: "vertical" };
@@ -71,7 +73,14 @@ export default function cart() {
           onApprove={function (data, actions) {
             return actions.order.capture().then(function (details) {
               const shipping = details.purchase_units[0].shipping;
-              createOrder(shipping);
+
+              createOrder({
+                customer: shipping.name.full_name,
+                address: shipping.address.address_line_1,
+                total: cart.total,
+                method: 1,
+                status: 0,
+              });
             });
           }}
         />
@@ -136,7 +145,12 @@ export default function cart() {
           <span>Total RS:{cart.total}</span>
           {open ? (
             <div>
-              <button className={styles.buttonCash}>CASH ON DELIVERY</button>
+              <button
+                className={styles.buttonCash}
+                onClick={() => setCash(true)}
+              >
+                CASH ON DELIVERY
+              </button>
               <PayPalScriptProvider
                 options={{
                   "client-id":
@@ -156,6 +170,7 @@ export default function cart() {
           )}
         </div>
       </div>
+      {cash && <OrderDetails total={cart.total} createOrder={createOrder} />}
     </div>
   );
 }

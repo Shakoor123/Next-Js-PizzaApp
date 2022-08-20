@@ -10,7 +10,7 @@ const OrderSchema = new mongoose.Schema(
       type: [Number],
       required: true,
     },
-    staus: {
+    status: {
       type: Number,
       default: 0,
     },

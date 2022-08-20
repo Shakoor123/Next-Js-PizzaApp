@@ -1,4 +1,4 @@
-import Product from "../../../models/Product";
+import Order from "../../../models/Order";
 import dbConnect from "../../../util/mongo";
 export default async function handler(req, res) {
   dbConnect();
@@ -8,8 +8,8 @@ export default async function handler(req, res) {
   } = req;
   if (method === "GET") {
     try {
-      const product = await Product.findById(id);
-      res.status(200).json(product);
+      const order = await Order.findById(id);
+      res.status(200).json(order);
     } catch (err) {
       res.status(500).json(err);
     }
