@@ -22,4 +22,12 @@ export default async function handler(req, res) {
       res.status(500).json(err);
     }
   }
+  if (method === "DELETE") {
+    try {
+      await Product.findByIdAndDelete(id);
+      res.status(200).json("product was deleted");
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
 }
