@@ -14,6 +14,19 @@ export default function index({ orders, products }) {
       console.log(err);
     }
   };
+  const handleStatus = async (id, cstatus) => {
+    try {
+      const res = await axios.put("http://localhost:3000/api/orders/" + id, {
+        status: cstatus + 1,
+      });
+      setOrderList(
+        res.data,
+        orderList.filter((order) => order._id !== id)
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className={styles.container}>
       <div className={styles.section}>
@@ -74,17 +87,22 @@ export default function index({ orders, products }) {
               <th>status</th>
               <th>Actions</th>
             </tr>
-            {orders.map((order) => (
-              <tr className={styles.row}>
+            {orderList.map((order) => (
+              <tr className={styles.row} key={order._id}>
                 <td>{order._id}</td>
                 <td>{order.customer}</td>
                 <td>{order.address}</td>
                 <td>rs {order.total}</td>
-                <td>{order.method == 1 ? "Paid" : "Not Paid"}</td>
+                {/* <td>{order.method == 1 ? "Paid" : "Not Paid"}</td> */}
                 <td>{order.status}</td>
 
                 <td>
-                  <button className={styles.stage}>Next stage</button>
+                  <button
+                    className={styles.stage}
+                    onClick={() => handleStatus(order._id, order.status)}
+                  >
+                    Next stage
+                  </button>
                 </td>
               </tr>
             ))}
