@@ -14,15 +14,14 @@ export default function index({ orders, products }) {
       console.log(err);
     }
   };
-  const handleStatus = async (id, cstatus) => {
+  const handleStatus = async (id) => {
+    const item = orderList.filter((order) => order._id === id)[0];
+    const cstatus = item.status;
     try {
       const res = await axios.put("http://localhost:3000/api/orders/" + id, {
         status: cstatus + 1,
       });
-      setOrderList(
-        res.data,
-        orderList.filter((order) => order._id !== id)
-      );
+      setOrderList(res.data, ...orderList.filter((orde) => orde._id !== id));
     } catch (err) {
       console.log(err);
     }
@@ -93,13 +92,13 @@ export default function index({ orders, products }) {
                 <td>{order.customer}</td>
                 <td>{order.address}</td>
                 <td>rs {order.total}</td>
-                {/* <td>{order.method == 1 ? "Paid" : "Not Paid"}</td> */}
+                <td>{order.method == 1 ? "Paid" : "Not Paid"}</td>
                 <td>{order.status}</td>
 
                 <td>
                   <button
                     className={styles.stage}
-                    onClick={() => handleStatus(order._id, order.status)}
+                    onClick={() => handleStatus(order._id)}
                   >
                     Next stage
                   </button>
@@ -112,7 +111,17 @@ export default function index({ orders, products }) {
     </div>
   );
 }
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (ctx) => {
+  console.log(ctx.req.cookies.token);
+  const myCookie = ctx.req?.cookies.token || "";
+  if (myCookie !== process.env.TOKEN) {
+    return {
+      redirect: {
+        destination: "/admin/login",
+        permanent: false,
+      },
+    };
+  }
   const productsRes = await axios.get("http://localhost:3000/api/products");
   const ordersRes = await axios.get("http://localhost:3000/api/orders");
   return {
