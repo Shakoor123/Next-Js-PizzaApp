@@ -1,0 +1,11 @@
+.add {
+  padding: 20px;
+  background-color: #d1411e;
+  margin: 0 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 23px;
+  margin-top: 10px;
+  cursor: pointer;
+}
