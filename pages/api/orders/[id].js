@@ -4,8 +4,11 @@ export default async function handler(req, res) {
   dbConnect();
   const {
     method,
+    cookies,
     query: { id },
   } = req;
+  const token = cookies.token;
+
   if (method === "GET") {
     try {
       const order = await Order.findById(id);
@@ -23,6 +26,9 @@ export default async function handler(req, res) {
     }
   }
   if (method === "PUT") {
+    if (!token || token != process.env.TOKEN) {
+      return res.status(401).json("you are not authenticated");
+    }
     try {
       const order = await Order.findByIdAndUpdate(id, req.body, { new: true });
       res.status(200).json(order);

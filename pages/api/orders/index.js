@@ -2,7 +2,9 @@ import Order from "../../../models/Order";
 import dbConnect from "../../../util/mongo";
 export default async function handler(req, res) {
   dbConnect();
-  const { method } = req;
+  const { method, cookies } = req;
+  const token = cookies.token;
+
   if (method === "GET") {
     try {
       const orders = await Order.find();

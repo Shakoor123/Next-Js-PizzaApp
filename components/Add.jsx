@@ -33,7 +33,7 @@ export default function Add({ setClose }) {
       const newProduct = {
         title,
         desc,
-        prices,
+        price: prices,
         topings: extraOptions,
         image: uploadRes.data.secure_url,
       };

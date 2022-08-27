@@ -36,7 +36,7 @@ export default function Product({ pizza }) {
     <div className={style.container}>
       <div className={style.left}>
         <div className={style.imageContainer}>
-          <Image src={"/img/pizza.png"} layout="fill" />
+          <Image src={pizza.image} layout="fill" />
         </div>
       </div>
       <div className={style.right}>
