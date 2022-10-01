@@ -11,7 +11,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { reset } from "../redux/cartSlice";
 import OrderDetails from "../components/orderDetails";
-export default function cart() {
+export default function Cart() {
   const cart = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
   const [cash, setCash] = useState();
@@ -108,6 +108,7 @@ export default function cart() {
                       src={product.image}
                       objectFit="cover"
                       layout="fill"
+                      alt=""
                     />
                   </div>
                 </td>

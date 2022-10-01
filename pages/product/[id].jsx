@@ -36,7 +36,7 @@ export default function Product({ pizza }) {
     <div className={style.container}>
       <div className={style.left}>
         <div className={style.imageContainer}>
-          <Image src={pizza.image} layout="fill" />
+          <Image src={pizza.image} layout="fill" alt="" />
         </div>
       </div>
       <div className={style.right}>
@@ -46,15 +46,15 @@ export default function Product({ pizza }) {
         <h3 className={style.innerTitle}>Choose the Size</h3>
         <h3 className={style.sizes}>
           <div className={style.size} onClick={() => handleSize(0)}>
-            <Image src={"/img/size.png"} layout="fill" />
+            <Image src={"/img/size.png"} layout="fill" alt="" />
             <span className={style.sizeName}>Small</span>
           </div>
           <div className={style.size} onClick={() => handleSize(1)}>
-            <Image src={"/img/size.png"} layout="fill" />
+            <Image src={"/img/size.png"} layout="fill" alt="" />
             <span className={style.sizeName}>Medium</span>
           </div>
           <div className={style.size} onClick={() => handleSize(2)}>
-            <Image src={"/img/size.png"} layout="fill" />
+            <Image src={"/img/size.png"} layout="fill" alt="" />
             <span className={style.sizeName}>Large</span>
           </div>
         </h3>

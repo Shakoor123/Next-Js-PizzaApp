@@ -3,7 +3,7 @@ import styles from "../../styles/Admin.module.css";
 import axios from "axios";
 import { useState } from "react";
 
-export default function index({ orders, products }) {
+export default function Index({ orders, products }) {
   const [productList, setProductList] = useState(products);
   const [orderList, setOrderList] = useState(orders);
   const handleDelete = async (id) => {
@@ -40,7 +40,7 @@ export default function index({ orders, products }) {
               <th>Actions</th>
             </tr>
             {productList.map((product) => (
-              <tr className={styles.row}>
+              <tr className={styles.row} key={product._id}>
                 <td>
                   <div className={styles.productImage}>
                     <Image
@@ -49,6 +49,7 @@ export default function index({ orders, products }) {
                       objectFit="cover"
                       width={80}
                       height={80}
+                      alt=""
                     />
                   </div>
                 </td>
