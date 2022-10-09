@@ -8,7 +8,7 @@ export default function Index({ orders, products }) {
   const [orderList, setOrderList] = useState(orders);
   const handleDelete = async (id) => {
     try {
-      axios.delete("http://localhost:3000/api/products/" + id);
+      axios.delete(`http://localhost:${process.env.port}/api/products/` + id);
       setProductList(productList.filter((pizza) => pizza._id !== id));
     } catch (err) {
       console.log(err);
@@ -18,9 +18,12 @@ export default function Index({ orders, products }) {
     const item = orderList.filter((order) => order._id === id)[0];
     const cstatus = item.status;
     try {
-      const res = await axios.put("http://localhost:3000/api/orders/" + id, {
-        status: cstatus + 1,
-      });
+      const res = await axios.put(
+        `http://localhost:${process.env.port}/api/orders/` + id,
+        {
+          status: cstatus + 1,
+        }
+      );
       setOrderList(res.data, ...orderList.filter((orde) => orde._id !== id));
     } catch (err) {
       console.log(err);
@@ -123,8 +126,13 @@ export const getServerSideProps = async (ctx) => {
       },
     };
   }
-  const productsRes = await axios.get("http://localhost:3000/api/products");
-  const ordersRes = await axios.get("http://localhost:3000/api/orders");
+
+  const productsRes = await axios.get(
+    `http://localhost:${process.env.process}/api/products`
+  );
+  const ordersRes = await axios.get(
+    `http://localhost:${process.env.port}/api/orders`
+  );
   return {
     props: {
       orders: ordersRes.data,

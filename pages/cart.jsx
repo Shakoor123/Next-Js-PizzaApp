@@ -10,7 +10,8 @@ import {
 import axios from "axios";
 import { useRouter } from "next/router";
 import { reset } from "../redux/cartSlice";
-import OrderDetails from "../components/orderDetails";
+// import OrderDetails from "../components/orderDetails";
+import OrderDetails from "../components/OrderDetails";
 export default function Cart() {
   const cart = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
@@ -23,7 +24,10 @@ export default function Cart() {
 
   const createOrder = async (data) => {
     try {
-      const res = await axios.post("http://localhost:3000/api/orders", data);
+      const res = await axios.post(
+        `http://localhost:${process.env.port}/api/orders`,
+        data
+      );
       res.status === 200 && router.push("/orders/" + res.data._id);
       dispatch(reset());
     } catch (err) {
