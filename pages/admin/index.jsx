@@ -128,7 +128,7 @@ export const getServerSideProps = async (ctx) => {
   }
 
   const productsRes = await axios.get(
-    `http://localhost:${process.env.process}/api/products`
+    `http://localhost:${process.env.port}/api/products`
   );
   const ordersRes = await axios.get(
     `http://localhost:${process.env.port}/api/orders`
