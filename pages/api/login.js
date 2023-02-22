@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   if (method === "POST") {
     const { username, password } = req.body;
 
-    if (username === process.env.NAME && password === process.env.PASSWORD) {
+    if (username === "admin" && password === "123") {
       res.setHeader(
         "set-cookie",
         cookie.serialize("token", process.env.TOKEN, {

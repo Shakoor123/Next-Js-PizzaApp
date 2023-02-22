@@ -37,3 +37,13 @@
   padding: 5px;
   cursor: pointer;
 }
+@media screen and (max-width: 450px) {
+  .container {
+    flex-direction: column;
+  }
+  .section,
+  .table,
+  .row {
+    width: 100%;
+  }
+}

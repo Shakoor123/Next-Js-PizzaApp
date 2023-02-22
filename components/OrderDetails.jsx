@@ -6,6 +6,7 @@ export default function OrderDetails({ total, createOrder }) {
   const [address, setAddress] = useState("");
   const handleClick = () => {
     createOrder({ customer, total, address, method: 0 });
+    return;
   };
   return (
     <div className={styles.container}>

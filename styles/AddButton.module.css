@@ -9,3 +9,10 @@
   margin-top: 10px;
   cursor: pointer;
 }
+@media screen and (max-width: 450px) {
+  .addbutton {
+    font-size: 14px;
+    width: 50%;
+    padding: 10px;
+  }
+}

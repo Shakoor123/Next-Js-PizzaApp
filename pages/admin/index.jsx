@@ -57,7 +57,7 @@ export default function Index({ orders, products }) {
                   </div>
                 </td>
                 <td>{product.title}</td>
-                <td>{product.topings[0].text}</td>
+                <td>{product.topings[0]?.text}</td>
                 <td>
                   Rs {product.price[0]},{product.price[1]},{product.price[2]}
                 </td>

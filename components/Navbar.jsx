@@ -24,14 +24,15 @@ export default function Navbar() {
           </Link>
           <div className={style.item}>Products</div>
           <div className={style.item}>Menu</div>
-          <Image
-            src={"/img/logo.png"}
-            alt=""
-            width={122}
-            className={style.logoImage}
-            height={102}
-          />
-
+          <Link href={"/"} passHref>
+            <Image
+              src={"/img/logo.png"}
+              alt=""
+              width={122}
+              className={style.logoImage}
+              height={102}
+            />
+          </Link>
           <div className={style.item}>Events</div>
           <div className={style.item}>Blog</div>
           <div className={style.item}>Contact</div>

@@ -81,9 +81,10 @@
   cursor: not-allowed;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 450px) {
   .container {
     flex-direction: column;
+    padding: 10px;
   }
 
   .trTitle {
@@ -93,8 +94,8 @@
   .tr {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-end;
     font-size: 20px;
   }
 
